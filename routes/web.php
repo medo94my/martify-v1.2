@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,7 @@ Route::get('/submit', function () {
     return view('submit');
 });
 Route::get('/shop','ProductController@index')->name('shop.index');
-Route::get('/addTocart/{id}','ProductController@addTocart');
+Route::get('/addTocart/{id}','ProductController@addTocart')->middleware('auth');
 Route::get('/cart','ProductController@cart')->name('shop.cart')->middleware('auth');
 Route::get('/cart/checkout','ProductController@checkout')->middleware(('auth'))->name('shop.checkout');
 Route::patch('/cart/update/{id}','ProductController@update')->middleware('auth')->name('shop.update');
