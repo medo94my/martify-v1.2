@@ -24,9 +24,9 @@ Route::get('/submit', function () {
 });
 Route::get('/shop','ProductController@index')->name('shop.index');
 Route::get('/addTocart/{id}','ProductController@addTocart');
-Route::get('/cart','ProductController@cart')->name('shop.cart');
-Route::get('/cart/checkout','ProductController@checkout')->name('shop.checkout');
-Route::patch('/cart/update/{id}','ProductController@update')->name('shop.update');
+Route::get('/cart','ProductController@cart')->name('shop.cart')->middleware('auth');
+Route::get('/cart/checkout','ProductController@checkout')->middleware(('auth'))->name('shop.checkout');
+Route::patch('/cart/update/{id}','ProductController@update')->middleware('auth')->name('shop.update');
 Route::post('/submit', function (Request $request) {
     $data =$request->validate([
         'title'=>'required|max:255',

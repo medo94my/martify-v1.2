@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use \App\Products;
 class ProductController extends Controller
 {
-    public function __construct(){
-        $this->middleware('auth');
-    }
+    // public function __construct(){
+    //     $this->middleware('auth');
+    // }
     public function index(){
         $products=Products::all();
         return view('shop.shop',['products'=>$products]);
