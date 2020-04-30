@@ -139,34 +139,7 @@
         <main class="py-4">
             @yield('content')
         </main>
-        <script>
-            function Qty_decrease(id) {
-                let element = document.querySelector('#qty-' + id);
-                if (element.innerHTML > 1) {
-                    element.innerHTML--
-                    element.innerHTML = element.innerText.replace(element)
-                }
-                axios.patch(`/update/${id}`, {
-                        quntity: element.innerHTML
-                    })
-                    .then(function (response) {
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-
-            }
-
-            function Qty_increase(id) {
-                let element = document.querySelector('#qty-' + id);
-                if (element.innerHTML >= 1) {
-                    element.innerHTML++
-                    element.innerHTML = element.innerText.replace(element)
-                }
-            }
-
-        </script>
+        @yield('script')
     </div>
 </body>
 

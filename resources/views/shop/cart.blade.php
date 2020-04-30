@@ -32,7 +32,7 @@
                                 <button class="btn btn-light bg-white mx-1" style="width: 36px;
                                 height: 36px;" onclick="Qty_decrease({{$id}})">-</button>
                                 <label type="text" style="width: 36px;
-                                height: 36px;" id="qty-{{$id}}" class="px-2 py-1 rounded border rounded text-center">{{$item['quantity']}}</label>
+                                height: 36px;" id="qty-{{$id}}" class="px-2 py-1 rounded border rounded text-center quantity">{{$item['quantity']}}</label>
                                 <button style="width: 36px;
                                 height: 36px;" class="btn btn-success mx-1" onclick="Qty_increase({{$id}})">+</button>
                                 </div>
@@ -58,4 +58,48 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script>
+    function Qty_decrease(id) {
+        let element = document.querySelector('#qty-' + id);
+        if (element.innerHTML > 1) {
+            element.innerHTML--
+            element.innerHTML = element.innerText.replace(element)
+        }
+        axios.patch(`cart/update/${id}`, {
+                quantity: element.innerHTML
+            })
+            .then(function (response) {
+                window.location.reload()
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }
+    function Qty_increase(id) {
+        let element = document.querySelector('#qty-' + id);
+        if (element.innerHTML >= 1) {
+            element.innerHTML++
+            element.innerHTML = element.innerText.replace(element)
+        }
+        axios.patch(`cart/update/${id}`, {
+                quantity: element.innerHTML
+            })
+            .then(function (response) {
+                window.location.reload()
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    const quantity=document.querySelectorAll('.quantity')
+    Array.from(quantity).forEach(element=>{
+        element.addEventListener('change',()=>{
+            console.log('changed')
+        })
+    })
+</script>
 @endsection

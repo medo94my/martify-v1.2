@@ -17,6 +17,15 @@ class ProductController extends Controller
         $items = \Cart::session(auth()->id())->getContent();
         return view('shop.checkout',compact('items'));
         }
+    public function update($id){
+        \Cart::session(auth()->id())->update($id, array(
+            'quantity' => array(
+                'relative' => false,
+                'value' => request('quantity')
+            ),
+          ));
+        error_log($id);
+        }
 
     public function cart(){
         $items = \Cart::session(auth()->id())->getContent();
