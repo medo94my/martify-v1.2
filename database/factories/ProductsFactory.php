@@ -9,6 +9,6 @@ $factory->define(Products::class, function (Faker $faker) {
     return [
         'name' => substr($faker->sentence(2), 0, -1),
         'image' => $faker->imageUrl(300,200),
-        'price' => $faker->randomFloat(2, 2, 100),
+        'price' => $faker->randomFloat(2, 2, 1),
     ];
 });
